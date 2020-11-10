@@ -42,7 +42,7 @@ class EmployeePayrollData {
         return this._startDate;
     }
     set startDate(startDate) {
-        if (startDate < Date.now())
+        if (startDate <= Date.now())
             this._startDate = startDate;
         else throw 'Start date is after today';
     }
