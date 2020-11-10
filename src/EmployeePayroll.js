@@ -122,3 +122,6 @@ empDailyHrsMap.forEach((value, key, map) => {
 console.log("Full working days: " + fullWorkingDays);
 console.log("Part working days: " + partWorkingDays);
 console.log("Non working days: " + nonWorkingDays);
+
+//UC10 Inline object creation
+
