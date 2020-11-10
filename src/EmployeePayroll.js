@@ -28,6 +28,7 @@ function calcDailyWages(empHrs) {
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWageArray = new Array();
+let empDailyWageMap = new Map();
 
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays <= NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
@@ -35,6 +36,7 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays <= NUM_OF_WORKING_DAY
     let empHrs = getWorkingHours(empCheck);
     totalEmpHrs += empHrs;
     empDailyWageArray.push(calcDailyWages(empHrs));
+    empDailyWageMap.set(totalWorkingDays, calcDailyWages(empHrs));
 }
 
 //UC7A-- calculate total wage using Array forEach traversal or reduce method
@@ -52,7 +54,7 @@ function totalWages(totslWage, dailyWage) {
 
 }
 
-console.log("UC7A--Emp wage with reduce: " + empDailyWageArray.reduce(totalWages, 0));
+console.log("UC7A--Emp wage with reduce: " + Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
 
 //UC7B-- show the day along with daily wage using array map helper function
 let dailyCntr = 0;
