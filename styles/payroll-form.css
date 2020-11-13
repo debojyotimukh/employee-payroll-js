@@ -172,3 +172,64 @@ label {
     flex-wrap: nowrap;
     flex-grow: inherit;
 }
+
+@media only screen and (max-width: 960px) {
+    .cancelButton {
+        margin-left: 0px;
+    }
+
+    .form {
+        width: 85%;
+        padding: 44px 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .form {
+        margin-top: 10px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .uploadButton {
+        justify-content: flex-start;
+    }
+
+    .profile-radio-content {
+        flex-flow: wrap;
+    }
+
+    .submit-reset {
+        width: 100%;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .buttonParent {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .submitButton {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .profile-radio-content{
+        width: 80%;
+        flex-wrap: wrap;
+    }
+    .text{
+        font-size: 14px;
+    }
+    .label{
+        white-space: nowrap;
+    }
+}
