@@ -102,7 +102,7 @@ label {
     padding: 12px;
     border: 1px solid #cccccc;
     border-radius: 4px;
-    resize: vertical;
+    /* resize: vertical; */
 }
 
 .profile-radio-content {
@@ -121,4 +121,13 @@ label {
     width: 40px;
     border-radius: 50%;
     margin-left: 12px;
+}
+
+.profile-date-content>label {
+    display: inline-block;
+}
+
+.date {
+    width: fit-content;
+
 }
