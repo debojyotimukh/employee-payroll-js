@@ -91,9 +91,22 @@
                 <label class="label text" for="startDate">Start Date</label>
                 <input class="input text date" type="date" id="startDate" name="startDate" required>
             </div>
+            <div class="row-content">
+                <!--Notes-->
+                <label class="label text" for="notes">Notes</label>
+                <textarea class="input" id="notes" name="Notes" placeholder=""
+                    style="height: 100px; resize: unset;"></textarea>
+            </div>
+            <div class="buttonParent">
+                <!--Buttons-->
+                <a href="./home.html" class="resetButton button cancelButton">Cancel</a>
+                <div class="submit-reset">
+                    <button type="submit" class="button submitButton" id="submitButton">Submit</button>
+                    <button type="reset" class="resetButton button">Reset</button>
+                </div>
+            </div>
         </form>
     </div>
-
 </body>
 
 </html>
