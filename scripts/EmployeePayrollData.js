@@ -24,7 +24,7 @@ class EmployeePayrollData {
         return this._gender;
     }
     set gender(gender) {
-        let genderRegex = RegExp('[M][F]');
+        let genderRegex = RegExp('^[MF]$');
         if (genderRegex.test(gender))
             this._gender = gender;
         else throw 'Gender has to be M or F';
@@ -76,34 +76,34 @@ class EmployeePayrollData {
     }
 }
 
-let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
-console.log(employeePayrollData.toString());
-try {
-    employeePayrollData.id = -1;
-    console.log(employeePayrollData.toString());
-} catch (e) {
-    console.error(e);
-}
-try {
-    employeePayrollData.name = "john";
-    console.log(employeePayrollData.toString());
-} catch (e) {
-    console.error(e);
-}
+// let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+// console.log(employeePayrollData.toString());
+// try {
+//     employeePayrollData.id = -1;
+//     console.log(employeePayrollData.toString());
+// } catch (e) {
+//     console.error(e);
+// }
+// try {
+//     employeePayrollData.name = "john";
+//     console.log(employeePayrollData.toString());
+// } catch (e) {
+//     console.error(e);
+// }
 
-try {
-    employeePayrollData.gender = 'H';
-    console.log(employeePayrollData.toString());
-} catch (e) {
-    console.error(e);
-}
+// try {
+//     employeePayrollData.gender = 'H';
+//     console.log(employeePayrollData.toString());
+// } catch (e) {
+//     console.error(e);
+// }
 
-try {
-    employeePayrollData.startDate = new Date();
-    console.log(employeePayrollData.toString());
-} catch (e) {
-    console.error(e);
-}
+// try {
+//     employeePayrollData.startDate = new Date();
+//     console.log(employeePayrollData.toString());
+// } catch (e) {
+//     console.error(e);
+// }
 
-let newEmployeePayrollData = new EmployeePayrollData(1, "Terrisa", 30000, "F", new Date());
-console.log(newEmployeePayrollData.toString());
+// let newEmployeePayrollData = new EmployeePayrollData(1, "Terrisa", 30000, "F", new Date());
+// console.log(newEmployeePayrollData.toString());
