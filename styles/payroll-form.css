@@ -97,6 +97,13 @@ label {
     font-family: Roboto;
 }
 
+error-output{
+    margin-left: 10px;
+    font-size: 12px;
+    font-style: italic;
+    color: tomato;
+}
+
 .input {
     width: 100%;
     padding: 12px;

@@ -1,12 +1,4 @@
 class EmployeePayrollData {
-    //constructor
-    constructor(...params) {
-        this.id = params[0];
-        this.name = params[1];
-        this.salary = params[2];
-        this.gender = params[3];
-        this.startDate = params[4];
-    }
 
     //getter and setters
     get name() {
@@ -47,13 +39,40 @@ class EmployeePayrollData {
         else throw 'Start date is after today';
     }
 
+    get profilePic() {
+        return this._profilePic;
+    }
+    set profilePic(profilePic) {
+        this._profilePic = profilePic;
+    }
+
+    get department() {
+        return this._department;
+    }
+    set department(department) {
+        this._department = department;
+    }
+
+    get salary() {
+        return this._salary;
+    }
+    set salary(salary) {
+        this._salary = salary;
+    }
+
+    get note() {
+        return this._note;
+    }
+    set note(note) {
+        this._note = note;
+    }
     //method
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const empDate = this.startDate === undefined ? "undefined" :
             this.startDate.toLocaleDateString("en-US", options);
         return "id=" + this.id + ", name= " + this.name + ", salary=" + this.salary + ", gender=" +
-            this.gender + ", startDate=" + empDate;
+            this.gender + ", department= " + this.department + ", profilePic= " + this.profilePic + ", startDate=" + empDate + ", note= " + this.note;
     }
 }
 
