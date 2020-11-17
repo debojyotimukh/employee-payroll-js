@@ -1,4 +1,6 @@
-window.addEventListener('DOMContentLoaded', () => createInnerHtml());
+window.addEventListener('DOMContentLoaded', () => {
+    return createInnerHtml();
+});
 
 const createInnerHtml = () => {
     const headerHtml = `<th></th>
@@ -9,9 +11,11 @@ const createInnerHtml = () => {
                     <th>Start Date</th>
                     <th>Actions</th>`;
 
+    //const empPayrollList = createEmployeePayrollJSON();
+    const empPayrollList = getEmpPayrollListFromStorage();
+    document.querySelector('#emp-count').textContent = empPayrollList.length;
     let innerHtml = `${headerHtml}`;
 
-    let empPayrollList = createEmployeePayrollJSON();
     for (const empPayrollData of empPayrollList) {
         innerHtml = `
         ${innerHtml}
@@ -19,7 +23,7 @@ const createInnerHtml = () => {
             <td><img class="profile" alt="" src="${empPayrollData._profilePic}"></td>
             <td>${empPayrollData._name}</td>
             <td>${empPayrollData._gender}</td>
-            <td>${getDeptHtml(empPayrollData._department)}</td>
+            <td>${getDeptHtml(empPayrollData._department)}</td>            
             <td>${empPayrollData._salary}</td>
             <td>${empPayrollData._startDate}</td>
             <td>
@@ -28,6 +32,7 @@ const createInnerHtml = () => {
             </td>
         </tr>`;
     }
+
 
     document.querySelector('#table-display').innerHTML = innerHtml;
 };
@@ -52,7 +57,7 @@ const createEmployeePayrollJSON = () => {
             _salary: '500000',
             _startDate: '29 Oct 2019',
             _note: '',
-            _id: new Date().getTime(),
+            _id: 10,
             _profilePic: '../assets/profile-images/Ellipse -2.png'
         },
         {
@@ -64,9 +69,14 @@ const createEmployeePayrollJSON = () => {
             _salary: '400000',
             _startDate: '29 Oct 2019',
             _note: '',
-            _id: new Date().getTime() + 1,
+            _id: 11,
             _profilePic: '../assets/profile-images/Ellipse -1.png'
         }
     ];
     return empPayrollListLocal;
+};
+
+const getEmpPayrollListFromStorage = () => {
+    let empPayrollList = localStorage.getItem('EmployeePayrollList');
+    return empPayrollList ? JSON.parse(empPayrollList) : [];
 };

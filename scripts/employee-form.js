@@ -67,7 +67,7 @@ const createEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues('[name=department]');
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
-    employeePayrollData.date = getInputValueById('#startDate');
+    employeePayrollData.startDate = getInputValueById('#startDate');
 
     alert(employeePayrollData.toString());
     return employeePayrollData;
