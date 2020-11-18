@@ -79,3 +79,14 @@ const getEmpPayrollListFromStorage = () => {
     let empPayrollList = localStorage.getItem('EmployeePayrollList');
     return empPayrollList ? JSON.parse(empPayrollList) : [];
 };
+
+// Remove employee from payroll details
+const remove = (node) => {
+
+};
+
+// Update employee details in payroll
+const update = (node) => {
+
+};
+

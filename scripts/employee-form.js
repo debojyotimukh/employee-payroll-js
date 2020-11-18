@@ -52,8 +52,10 @@ function createAndUpdateStorage(employeePayrollData) {
 
 }
 
-const createEmployeePayroll = () => {
+const createEmployeePayroll = (id) => {
     let employeePayrollData = new EmployeePayrollData();
+    if (!id) employeePayrollData.id = generateEmployeeId();
+    else employeePayrollData.id = id;
 
     try {
         employeePayrollData.name = getInputValueById('#name');
@@ -121,4 +123,12 @@ const setTextValue = (id, value) => {
 const setValue = (id, value) => {
     const element = document.querySelector(id);
     element.value = value;
+};
+
+const generateEmployeeId = () => {
+    let empId = localStorage.getItem("RecentID");
+    empId = !empId ? 1 : (parseInt(empId) + 1).toString();
+    localStorage.setItem("RecentID", empId);
+
+    return empId;
 };
