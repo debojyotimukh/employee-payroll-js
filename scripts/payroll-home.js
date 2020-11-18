@@ -11,7 +11,6 @@ const createInnerHtml = () => {
                     <th>Start Date</th>
                     <th>Actions</th>`;
 
-    //const empPayrollList = createEmployeePayrollJSON();
     const empPayrollList = getEmpPayrollListFromStorage();
     document.querySelector('#emp-count').textContent = empPayrollList.length;
     let innerHtml = `${headerHtml}`;
