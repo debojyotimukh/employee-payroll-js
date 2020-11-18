@@ -82,7 +82,16 @@ const getEmpPayrollListFromStorage = () => {
 
 // Remove employee from payroll details
 const remove = (node) => {
-
+    let empPayrollList = getEmpPayrollListFromStorage();
+    let empPayrollData = empPayrollList.find(empData => empData._id == node.id);
+    alert(empPayrollData.toString());
+    alert(empPayrollData._id);
+    if (!empPayrollData) return;
+    const index = empPayrollList.map(empData => empData._id)
+        .indexOf(empPayrollData._id);
+    empPayrollList.splice(index, 1);
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
+    createInnerHtml();
 };
 
 // Update employee details in payroll
