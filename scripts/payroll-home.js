@@ -1,4 +1,7 @@
+let isUpdate = false;
+
 window.addEventListener('DOMContentLoaded', () => {
+    localStorage.removeItem("editEmp");
     return createInnerHtml();
 });
 
@@ -94,8 +97,20 @@ const remove = (node) => {
     createInnerHtml();
 };
 
+
 // Update employee details in payroll
 const update = (node) => {
+    isUpdate = true;
 
+    let empPayrollList = getEmpPayrollListFromStorage();
+    let empPayrollData = empPayrollList.find(empData => empData._id == node.id);
+    alert(empPayrollData.toString());
+    alert(empPayrollData._id);
+    if (!empPayrollData) return;
+    localStorage.setItem("editEmp", JSON.stringify(empPayrollData));
+    window.location.href = "../pages/payroll-form.html";
+
+    isUpdate = false;
 };
+
 
