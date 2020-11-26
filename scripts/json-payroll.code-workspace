@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\employee-payroll-ajax"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "employee-payroll-js"
+	}
+}

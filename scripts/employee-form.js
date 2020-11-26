@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            (new EmployeePayrollData()).name = name.value;
+            checkName(name.value);
             textError.textContent = "";
         } catch (e) {
             textError.textContent = e;
@@ -22,9 +22,35 @@ window.addEventListener('DOMContentLoaded', function () {
         output.textContent = salary.value;
     });
 
+    const date=document.querySelector('#startDate');
+    date.addEventListener('input',function () {
+        let startDate=getInputValueById('#startDate');
+        try {
+            checkDate(new Date(Date.parse(startDate)));
+            setTextValue('.date-error',"");
+        } catch (error) {
+            setTextValue('.date-error',error);
+        }
+    });
+
+    document.querySelector('#cancelButton').href = site_properties.home_page;
     checkForUpdate();
 
 });
+
+const checkName = (name) => {
+    let nameRegex = RegExp('^([A-Z]{1}[a-z]{3,})+(\\s)+([A-Z]{1}[a-z]{3,})$');
+    if (!nameRegex.test(name))
+        throw 'Name is incorrect';
+};
+
+const checkDate = (date) => {
+    let now = new Date();
+    if (date > now) throw 'Start date is future date';
+    var diff = Math.abs(now.getTime() - date.getTime());
+    if (diff / (1000 * 60 * 60 * 24) > 30)
+        throw 'Start date beyond 30 days';
+};
 
 /**
  * Save the form in the HTML local storage
@@ -50,11 +76,11 @@ const updateOp = () => {
     isUpdate = false;
     const employeePayrollJson = localStorage.getItem("editEmp");
     let employeePayrollObj = JSON.parse(employeePayrollJson);
-    const id = employeePayrollObj._id;
+    const id = employeePayrollObj.id;
     let employeePayrollData = createEmployeePayroll(id);
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
-    const index = employeePayrollList.map(empData => empData._id)
-        .indexOf(employeePayrollData._id);
+    const index = employeePayrollList.map(empData => empData.id)
+        .indexOf(employeePayrollData.id);
     employeePayrollList.splice(index, 1, employeePayrollData);
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 
