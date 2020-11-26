@@ -15,14 +15,14 @@
       "id": 1
     },
     {
-      "_id": "19",
+      "_id": null,
       "_name": "Stephen Strange",
       "_profilePic": "../assets/profile-images/Ellipse -3.png",
       "_gender": "M",
       "_department": [
         "Finance"
       ],
-      "_salary": "400000",
+      "_salary": "500000",
       "_note": "",
       "_startDate": "2020-11-18",
       "id": 2
@@ -33,9 +33,10 @@
       "_profilePic": "../assets/profile-images/Ellipse 1.png",
       "_gender": "F",
       "_department": [
+        "Sales",
         "Others"
       ],
-      "_salary": "400000",
+      "_salary": "359800",
       "_note": "",
       "_startDate": "2020-11-18",
       "id": 3
@@ -52,6 +53,20 @@
       "_note": "",
       "_startDate": "2020-11-04",
       "id": 4
+    },
+    {
+      "_id": null,
+      "_name": "Yudhajit Kolay",
+      "_profilePic": "../assets/profile-images/Ellipse -3.png",
+      "_gender": "M",
+      "_department": [
+        "HR",
+        "Engineer"
+      ],
+      "_salary": "500000",
+      "_note": "",
+      "_startDate": "2020-11-19",
+      "id": 5
     }
   ]
 }

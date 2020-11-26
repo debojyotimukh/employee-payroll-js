@@ -1,11 +1,11 @@
-var empPayrollList=[];
+var isUpdate = false;
+var empPayrollList = [];
 window.addEventListener('DOMContentLoaded', function () {
     if (site_properties.use_local_storage.match("true")) {
         getEmpPayrollListFromStorage();
     } else {
         getEmployeePayrollListFromServer();
     }
-    //getEmployeePayrollListFromServer();
     createInnerHtml();
 });
 
@@ -13,12 +13,13 @@ const processEmployeePayrollDataResponse = () => {
     document.querySelector('.emp-count').textContent = empPayrollList.length;
     createInnerHtml();
     localStorage.removeItem("editEmp");
-    console.warn("list:"+empPayrollList);
+    console.warn("list:" + empPayrollList);
 };
 
 const getEmpPayrollListFromStorage = () => {
-    let empPayrollList = localStorage.getItem('EmployeePayrollList');
-    return empPayrollList ? JSON.parse(empPayrollList) : [];
+    let empPayrollListJson = localStorage.getItem('EmployeePayrollList');
+    empPayrollList = empPayrollListJson ? JSON.parse(empPayrollListJson) : [];
+    processEmployeePayrollDataResponse();
 };
 
 const getEmployeePayrollListFromServer = () => {
@@ -26,10 +27,7 @@ const getEmployeePayrollListFromServer = () => {
         empPayrollList = JSON.parse(responseText);
         processEmployeePayrollDataResponse();
     }).catch(error => {
-        console.log("Get error status: " + JSON.stringify(error));
-        console.warn("Error fetching"+error);
-        //empPayrollList = [];
-        //processEmployeePayrollDataResponse();
+        console.warn("Get error status: " + JSON.stringify(error));
     });
 };
 
@@ -72,4 +70,17 @@ const getDeptHtml = (deptList) => {
         deptHtml = `${deptHtml} <div class='dept-label'>${dept}</div>`;
     }
     return deptHtml;
+};
+
+// Update employee details in payroll
+const update = (node) => {
+    isUpdate = true;
+    console.log("For update: " + node.id.toString());
+
+    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    if (!empPayrollData) return;
+    localStorage.setItem("editEmp", JSON.stringify(empPayrollData));
+    window.location.href = "../pages/payroll-form.html";
+
+    isUpdate = false;
 };
