@@ -22,14 +22,14 @@ window.addEventListener('DOMContentLoaded', function () {
         output.textContent = salary.value;
     });
 
-    const date=document.querySelector('#startDate');
-    date.addEventListener('input',function () {
-        let startDate=getInputValueById('#startDate');
+    const date = document.querySelector('#startDate');
+    date.addEventListener('input', function () {
+        let startDate = getInputValueById('#startDate');
         try {
             checkDate(new Date(Date.parse(startDate)));
-            setTextValue('.date-error',"");
+            setTextValue('.date-error', "");
         } catch (error) {
-            setTextValue('.date-error',error);
+            setTextValue('.date-error', error);
         }
     });
 
@@ -56,6 +56,10 @@ const checkDate = (date) => {
  * Save the form in the HTML local storage
  */
 const save = (event) => {
+    if (site_properties.use_local_storage.match("false")) {
+        createOrUpdateEmployeePayroll();
+        return;
+    }
     if (isUpdate) {
         updateOp();
         window.location.replace(site_properties.home_page);
@@ -150,6 +154,29 @@ function createAndUpdateStorage(employeePayrollData) {
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 
 }
+
+const createOrUpdateEmployeePayroll = () => {
+    alert("update json");
+    let postURL = site_properties.server_url;
+    let methodCall = "POST";
+    if (isUpdate) {
+        const employeePayrollJson = localStorage.getItem("editEmp");
+        let employeePayrollObj = JSON.parse(employeePayrollJson);
+        methodCall = "PUT";
+        postURL = postURL + employeePayrollObj.id.toString();
+    }
+    let employeePayrollData = createEmployeePayroll();
+    employeePayrollData._id = null;
+    //postURL = postURL + employeePayrollData.id.toString();
+    alert(postURL.toString());
+    makePromiseCall(methodCall, postURL, true, employeePayrollData).then(responseText => {
+        resetForm();
+        window.location.replace(site_properties.home_page);
+    }).catch(error => {
+        alert(error.toString());
+        throw error;
+    });
+};
 
 /**
  * Reset payroll form

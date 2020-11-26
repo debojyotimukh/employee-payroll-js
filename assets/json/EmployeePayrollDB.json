@@ -1,52 +1,57 @@
 {
   "employee": [
     {
-      "name": "mohit kumar new",
-      "gender": "male",
-      "department": [
-        "HR"
+      "_id": -1,
+      "_name": "Debojyoti Mukherjee",
+      "_profilePic": "../assets/profile-images/Ellipse -8.png",
+      "_gender": "M",
+      "_department": [
+        "Finance",
+        "Engineer"
       ],
-      "salary": "30000",
-      "startDate": "1 Jan 2020",
-      "notes": "",
-      "id": 1604589551457,
-      "profilePic": "../assets/profile-images/Ellipse 1.png"
+      "_salary": "400000",
+      "_note": "",
+      "_startDate": "2020-11-25",
+      "id": 1
     },
     {
-      "name": "mohit kumar test",
-      "gender": "male",
-      "department": [
-        "HR"
+      "_id": "19",
+      "_name": "Stephen Strange",
+      "_profilePic": "../assets/profile-images/Ellipse -3.png",
+      "_gender": "M",
+      "_department": [
+        "Finance"
       ],
-      "salary": "30000",
-      "startDate": "1 Jan 2020",
-      "notes": "",
-      "id": 1604589594363,
-      "profilePic": "../assets/profile-images/Ellipse 1.png"
+      "_salary": "400000",
+      "_note": "",
+      "_startDate": "2020-11-18",
+      "id": 2
     },
     {
-      "name": "mohit",
-      "gender": "male",
-      "department": [
-        "HR"
+      "_id": null,
+      "_name": "Sunita Halder",
+      "_profilePic": "../assets/profile-images/Ellipse 1.png",
+      "_gender": "F",
+      "_department": [
+        "Others"
       ],
-      "salary": "30000",
-      "startDate": "1 Jan 2020",
-      "notes": "",
-      "id": 1604589699566,
-      "profilePic": "../assets/profile-images/Ellipse -3.png"
+      "_salary": "400000",
+      "_note": "",
+      "_startDate": "2020-11-18",
+      "id": 3
     },
     {
-      "name": "test",
-      "gender": "male",
-      "department": [
+      "_id": null,
+      "_name": "Mahesh Chatterjee",
+      "_profilePic": "../assets/profile-images/Ellipse -3.png",
+      "_gender": "M",
+      "_department": [
         "HR"
       ],
-      "salary": "30000",
-      "startDate": "1 Jan 2020",
-      "notes": "",
-      "id": 1604589731061,
-      "profilePic": "../assets/profile-images/Ellipse -3.png"
+      "_salary": "344200",
+      "_note": "",
+      "_startDate": "2020-11-04",
+      "id": 4
     }
   ]
 }
