@@ -135,6 +135,12 @@ error-output {
     display: inline-block;
 }
 
+.slider {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .date {
     width: fit-content;
 }

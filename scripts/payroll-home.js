@@ -1,5 +1,6 @@
 var isUpdate = false;
 var empPayrollList = [];
+
 window.addEventListener('DOMContentLoaded', function () {
     if (site_properties.use_local_storage.match("true")) {
         getEmpPayrollListFromStorage();
@@ -51,7 +52,7 @@ const createInnerHtml = () => {
                         <td>${empPayrollData._gender}</td>
                         <td>${getDeptHtml(empPayrollData._department)}</td>
                         <td>${empPayrollData._salary}</td>
-                        <td>${empPayrollData._startDate}</td>
+                        <td>${stringifyDate(empPayrollData._startDate)}</td>
                         <td>
                             <img id="${empPayrollData.id}" onclick="remove(this)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
                             <img id="${empPayrollData.id}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
@@ -83,4 +84,25 @@ const update = (node) => {
     window.location.href = "../pages/payroll-form.html";
 
     isUpdate = false;
+};
+
+// Delete employee details from payroll
+const remove = (node) => {
+    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    if (!empPayrollData) return;
+    if(!confirm("Confirm delete?")) return;
+    const index = empPayrollList.map(empData => empData.id)
+        .indexOf(empPayrollData.id);
+    empPayrollList.splice(index, 1);
+    if (site_properties.use_local_storage.match("true")) {
+        localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
+        createInnerHtml();
+    } else {
+        const deleteURL = site_properties.server_url + empPayrollData.id.toString();
+        makePromiseCall("DELETE", deleteURL, false).then(responseText => {
+            createInnerHtml();
+        }).catch(error => {
+            console.log("DELETE error status: " + error.toString());
+        });
+    }
 };

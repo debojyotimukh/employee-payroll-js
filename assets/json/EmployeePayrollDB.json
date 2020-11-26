@@ -1,20 +1,6 @@
 {
   "employee": [
     {
-      "_id": -1,
-      "_name": "Debojyoti Mukherjee",
-      "_profilePic": "../assets/profile-images/Ellipse -8.png",
-      "_gender": "M",
-      "_department": [
-        "Finance",
-        "Engineer"
-      ],
-      "_salary": "400000",
-      "_note": "",
-      "_startDate": "2020-11-25",
-      "id": 1
-    },
-    {
       "_id": null,
       "_name": "Stephen Strange",
       "_profilePic": "../assets/profile-images/Ellipse -3.png",
@@ -56,16 +42,17 @@
     },
     {
       "_id": null,
-      "_name": "Yudhajit Kolay",
-      "_profilePic": "../assets/profile-images/Ellipse -3.png",
+      "_name": "Debojyoti Mukherjee",
+      "_profilePic": "../assets/profile-images/Ellipse -8.png",
       "_gender": "M",
       "_department": [
         "HR",
+        "Finance",
         "Engineer"
       ],
       "_salary": "500000",
-      "_note": "",
-      "_startDate": "2020-11-19",
+      "_note": "CEO",
+      "_startDate": "2020-11-02",
       "id": 5
     }
   ]

@@ -76,7 +76,7 @@ const save = (event) => {
 };
 
 const storageUpdate = () => {
-    alert("update");
+    console.log("update storage");
     isUpdate = false;
     const employeePayrollJson = localStorage.getItem("editEmp");
     let employeePayrollObj = JSON.parse(employeePayrollJson);
@@ -150,13 +150,11 @@ function createAndUpdateStorage(employeePayrollData) {
     } else {
         employeePayrollList = [employeePayrollData];
     }
-    alert(employeePayrollList.toString());
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 
 }
 
 const createOrUpdateEmployeePayroll = () => {
-    alert("update json");
     let URL = site_properties.server_url;
     let methodCall = "POST";
     if (isUpdate) {
