@@ -14,7 +14,8 @@ const processEmployeePayrollDataResponse = () => {
     document.querySelector('.emp-count').textContent = empPayrollList.length;
     createInnerHtml();
     localStorage.removeItem("editEmp");
-    console.warn("list:" + empPayrollList);
+
+    //alert("list:" + JSON.stringify(empPayrollList));
 };
 
 const getEmpPayrollListFromStorage = () => {
@@ -47,18 +48,19 @@ const createInnerHtml = () => {
         innerHtml = `
                     ${innerHtml}
                     <tr>
-                        <td><img class="profile" alt="" src="${empPayrollData._profilePic}"></td>
-                        <td>${empPayrollData._name}</td>
-                        <td>${empPayrollData._gender}</td>
-                        <td>${getDeptHtml(empPayrollData._department)}</td>
-                        <td>${empPayrollData._salary}</td>
-                        <td>${stringifyDate(empPayrollData._startDate)}</td>
+                        <td><img class="profile" alt="" src="${empPayrollData.profilePic}"></td>
+                        <td>${empPayrollData.name}</td>
+                        <td>${empPayrollData.gender}</td>
+                        <td>${getDeptHtml(empPayrollData.department)}</td>
+                        <td>${empPayrollData.salary}</td>
+                        <td>${stringifyDate(empPayrollData.startDate)}</td>
                         <td>
                             <img id="${empPayrollData.id}" onclick="remove(this)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
                             <img id="${empPayrollData.id}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
                         </td>
                     </tr>`;
     }
+
 
 
     document.querySelector('#table-display').innerHTML = innerHtml;
@@ -75,8 +77,9 @@ const getDeptHtml = (deptList) => {
 
 // Update employee details in payroll
 const update = (node) => {
+    alert("for update");
     isUpdate = true;
-    console.log("For update: " + node.id.toString());
+    //console.log("For update: " + node.id.toString());
 
     let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
     if (!empPayrollData) return;
@@ -90,7 +93,7 @@ const update = (node) => {
 const remove = (node) => {
     let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
     if (!empPayrollData) return;
-    if(!confirm("Confirm delete?")) return;
+    if (!confirm("Confirm delete?")) return;
     const index = empPayrollList.map(empData => empData.id)
         .indexOf(empPayrollData.id);
     empPayrollList.splice(index, 1);
