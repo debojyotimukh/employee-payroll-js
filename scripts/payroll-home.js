@@ -14,8 +14,6 @@ const processEmployeePayrollDataResponse = () => {
     document.querySelector('.emp-count').textContent = empPayrollList.length;
     createInnerHtml();
     localStorage.removeItem("editEmp");
-
-    alert("list:" + JSON.stringify(empPayrollList));
 };
 
 const getEmpPayrollListFromStorage = () => {
@@ -26,11 +24,9 @@ const getEmpPayrollListFromStorage = () => {
 
 const getEmployeePayrollListFromServer = () => {
     makePromiseCall("GET", site_properties.server_url, false).then(responseText => {
-        //alert(responseText);
         let empPayrollResponse = JSON.parse(responseText);
         empPayrollList = empPayrollResponse.data;
-        alert(empPayrollList.toString());
-        alert(empPayrollResponse.message.toString());
+       
         processEmployeePayrollDataResponse();
     }).catch(error => {
         console.warn("Get error status: " + JSON.stringify(error));
@@ -81,9 +77,7 @@ const getDeptHtml = (deptList) => {
 
 // Update employee details in payroll
 const update = (node) => {
-    alert("for update");
     isUpdate = true;
-    alert("For update: " + node.id.toString());
 
     let empPayrollData = empPayrollList.find(empData => empData.employeeId == node.id);
     if (!empPayrollData) return;
