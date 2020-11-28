@@ -63,7 +63,7 @@ const save = (event) => {
     }
     if (isUpdate) {
         storageUpdate();
-        window.location.replace(site_properties.home_page);
+        window.location.href=site_properties.home_page;
     }
     else {
         try {
@@ -93,9 +93,10 @@ const storageUpdate = () => {
 };
 
 const createEmployeePayroll = (id) => {
-    let employeePayrollData = new EmployeePayrollData();
-    if (!id) employeePayrollData.id = generateEmployeeId();
-    else employeePayrollData.id = id;
+    //let employeePayrollData = new EmployeePayrollData();
+    let employeePayrollData = createPayrollObj();
+    if (!id) employeePayrollData.employeeId = generateEmployeeId();
+    else employeePayrollData.employeeId = id;
 
     try {
         employeePayrollData.name = getInputValueById('#name');
@@ -170,17 +171,17 @@ let createPayrollObj = () => {
 };
 
 const createOrUpdateEmployeePayroll = () => {
-    let URL = site_properties.server_url;
+    let URL = site_properties.server_url + "create/";
     let methodCall = "POST";
     if (isUpdate) {
         const employeePayrollJson = localStorage.getItem("editEmp");
         let employeePayroll = JSON.parse(employeePayrollJson);
         methodCall = "PUT";
-        URL = URL + employeePayroll.id.toString();
-        console.log("put to:" + URL.toString());
+        URL = site_properties.server_url + "update/" + employeePayroll.employeeId.toString();
+        alert("put to:" + URL.toString());
     }
     let employeePayrollData = createPayrollObj();
-    
+
     makePromiseCall(methodCall, URL, true, employeePayrollData).then(responseText => {
         resetForm();
         window.location.replace(site_properties.home_page);

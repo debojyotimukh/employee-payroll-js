@@ -15,7 +15,7 @@ const processEmployeePayrollDataResponse = () => {
     createInnerHtml();
     localStorage.removeItem("editEmp");
 
-    //alert("list:" + JSON.stringify(empPayrollList));
+    alert("list:" + JSON.stringify(empPayrollList));
 };
 
 const getEmpPayrollListFromStorage = () => {
@@ -26,7 +26,11 @@ const getEmpPayrollListFromStorage = () => {
 
 const getEmployeePayrollListFromServer = () => {
     makePromiseCall("GET", site_properties.server_url, false).then(responseText => {
-        empPayrollList = JSON.parse(responseText);
+        //alert(responseText);
+        let empPayrollResponse = JSON.parse(responseText);
+        empPayrollList = empPayrollResponse.data;
+        alert(empPayrollList.toString());
+        alert(empPayrollResponse.message.toString());
         processEmployeePayrollDataResponse();
     }).catch(error => {
         console.warn("Get error status: " + JSON.stringify(error));
@@ -55,8 +59,8 @@ const createInnerHtml = () => {
                         <td>${empPayrollData.salary}</td>
                         <td>${stringifyDate(empPayrollData.startDate)}</td>
                         <td>
-                            <img id="${empPayrollData.id}" onclick="remove(this)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
-                            <img id="${empPayrollData.id}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
+                            <img id="${empPayrollData.employeeId}" onclick="remove(this)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
+                            <img id="${empPayrollData.employeeId}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
                         </td>
                     </tr>`;
     }
@@ -79,9 +83,9 @@ const getDeptHtml = (deptList) => {
 const update = (node) => {
     alert("for update");
     isUpdate = true;
-    //console.log("For update: " + node.id.toString());
+    alert("For update: " + node.id.toString());
 
-    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    let empPayrollData = empPayrollList.find(empData => empData.employeeId == node.id);
     if (!empPayrollData) return;
     localStorage.setItem("editEmp", JSON.stringify(empPayrollData));
     window.location.href = "../pages/payroll-form.html";
@@ -91,17 +95,17 @@ const update = (node) => {
 
 // Delete employee details from payroll
 const remove = (node) => {
-    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    let empPayrollData = empPayrollList.find(empData => empData.employeeId == node.id);
     if (!empPayrollData) return;
     if (!confirm("Confirm delete?")) return;
-    const index = empPayrollList.map(empData => empData.id)
-        .indexOf(empPayrollData.id);
+    const index = empPayrollList.map(empData => empData.employeeId)
+        .indexOf(empPayrollData.employeeId);
     empPayrollList.splice(index, 1);
     if (site_properties.use_local_storage.match("true")) {
         localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
         createInnerHtml();
     } else {
-        const deleteURL = site_properties.server_url + empPayrollData.id.toString();
+        const deleteURL = site_properties.server_url + "delete/" + empPayrollData.employeeId.toString();
         makePromiseCall("DELETE", deleteURL, false).then(responseText => {
             createInnerHtml();
         }).catch(error => {
