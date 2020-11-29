@@ -63,7 +63,7 @@ const save = (event) => {
     }
     if (isUpdate) {
         storageUpdate();
-        window.location.href=site_properties.home_page;
+        window.location.href = site_properties.home_page;
     }
     else {
         try {
@@ -93,53 +93,11 @@ const storageUpdate = () => {
 };
 
 const createEmployeePayroll = (id) => {
-    //let employeePayrollData = new EmployeePayrollData();
     let employeePayrollData = createPayrollObj();
     if (!id) employeePayrollData.employeeId = generateEmployeeId();
     else employeePayrollData.employeeId = id;
 
-    try {
-        employeePayrollData.name = getInputValueById('#name');
-    } catch (error) {
-        document.querySelector('.text-error').textContent = error;
-        throw error;
-    }
-
-    employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
-    employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
-    employeePayrollData.department = getSelectedValues('[name=department]');
-    employeePayrollData.salary = getInputValueById('#salary');
-    employeePayrollData.note = getInputValueById('#notes');
-    employeePayrollData.startDate = getInputValueById('#startDate');
-
     return employeePayrollData;
-};
-
-const generateEmployeeId = () => {
-    let empId = localStorage.getItem("RecentID");
-    empId = !empId ? 1 : (parseInt(empId) + 1).toString();
-    localStorage.setItem("RecentID", empId);
-
-    return empId;
-};
-
-const getSelectedValues = (propertyValue) => {
-    let allItems = document.querySelectorAll(propertyValue);
-    let selItems = [];
-    allItems.forEach(item => {
-        if (item.checked) selItems.push(item.value);
-    });
-    return selItems;
-};
-
-const getInputValueById = (id) => {
-    let value = document.querySelector(id).value;
-    return value;
-};
-
-const getInputElementValue = (id) => {
-    let value = document.getElementById(id).value;
-    return value;
 };
 
 function createAndUpdateStorage(employeePayrollData) {
@@ -156,6 +114,14 @@ function createAndUpdateStorage(employeePayrollData) {
 }
 
 let createPayrollObj = () => {
+    try {
+        checkName(getInputValueById('#name'));
+        checkDate(new Date(Date.parse(getInputValueById('#startDate'))));
+    } catch (error) {
+        alert(error.toString());
+        return;
+    }
+
     let employeePayrollObj = {};
 
     employeePayrollObj.name = getInputValueById('#name');
@@ -180,7 +146,7 @@ const createOrUpdateEmployeePayroll = () => {
         alert("put to:" + URL.toString());
     }
     let employeePayrollData = createPayrollObj();
-
+    if (!employeePayrollData) return;
     makePromiseCall(methodCall, URL, true, employeePayrollData).then(responseText => {
         resetForm();
         window.location.replace(site_properties.home_page);
@@ -204,23 +170,6 @@ const resetForm = () => {
     setValue('#startDate', '');
 };
 
-const unsetSelectedValues = (propertyValue) => {
-    let allItems = document.querySelectorAll(propertyValue);
-    allItems.forEach(item => {
-        item.checked = false;
-    });
-};
-
-const setTextValue = (id, value) => {
-    const element = document.querySelector(id);
-    element.textContent = value;
-};
-
-const setValue = (id, value) => {
-    const element = document.querySelector(id);
-    element.value = value;
-};
-
 const checkForUpdate = () => {
     const employeePayrollJson = localStorage.getItem("editEmp");
     isUpdate = employeePayrollJson ? true : false;
@@ -236,17 +185,4 @@ const checkForUpdate = () => {
     setValue('#notes', employeePayrollObj.note);
     setValue('#startDate', employeePayrollObj.startDate);
 
-};
-
-const setSelectedValues = (propertyValue, value) => {
-    let allItems = document.querySelectorAll(propertyValue);
-    allItems.forEach(item => {
-        if (Array.isArray(value)) {
-            if (value.includes(item.value)) {
-                item.checked = true;
-            }
-        }
-        else if (item.value === value)
-            item.checked = true;
-    });
 };
