@@ -26,7 +26,7 @@ const getEmployeePayrollListFromServer = () => {
     makePromiseCall("GET", site_properties.server_url, false).then(responseText => {
         let empPayrollResponse = JSON.parse(responseText);
         empPayrollList = empPayrollResponse.data;
-       
+
         processEmployeePayrollDataResponse();
     }).catch(error => {
         console.warn("Get error status: " + JSON.stringify(error));
@@ -106,4 +106,6 @@ const remove = (node) => {
             console.log("DELETE error status: " + error.toString());
         });
     }
+
+    document.querySelector('.emp-count').textContent = empPayrollList.length;
 };
