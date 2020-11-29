@@ -97,7 +97,8 @@ body {
 }
 
 .table {
-    width: 100%;
+    width: 90%;
+    align-self: center;
     border-collapse: separate;
     border-spacing: 0 15px;
     min-width: 800px;
